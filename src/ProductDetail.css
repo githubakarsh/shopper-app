@@ -6,6 +6,14 @@
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+@media screen and (max-width : 600px) {
+  .detail-container {
+    margin: auto;
+    width: calc(100% - 4px);
+    margin-top: 30px;
+  }
+}
+
 .row {
   display: flex;
   margin: 16px 0;

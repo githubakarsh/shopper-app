@@ -1,43 +1,29 @@
-import React, { useState, useEffect } from "react";
-
-import { fetchProductDetail } from "./utils/api";
-
+import React from "react";
 import "./ProductDetail.css";
 
-function ProductDetail({ productId }) {
-  const [productInfo, setProductInfo] = useState(null);
+const ProductDetail = ({ productInfo }) => {
 
-  useEffect(() => {
-    if (!productId) return;
+    const regex = /^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?$/;
 
-    fetchProductDetail(productId).then((productInfo) =>
-      setProductInfo(productInfo)
-    );
-  }, [productId]);
-
-  const renderProductInfo = () => {
     return (
       <div className="detail-container">
         <div className="row">
-          <img src={productInfo.image} className="product-image" />
+          <img src={productInfo.image} alt={productInfo.title} className="product-image" />
         </div>
         <div className="row">
           <div className="row-title">Name:</div>
           <div className="row-body">{productInfo.title}</div>
         </div>
         <div className="row">
-          <div className="row-title">Name:</div>
+          <div className="row-title">Description:</div>
           <div className="row-body">{productInfo.description}</div>
         </div>
         <div className="row">
           <div className="row-title">Price:</div>
-          <div className="row-body">{productInfo.price}</div>
+          <div className="row-body">£{new Intl.NumberFormat('en-GB').format(productInfo.price)}</div>
         </div>
       </div>
     );
-  };
-
-  return productInfo && renderProductInfo();
 }
 
 export default ProductDetail;

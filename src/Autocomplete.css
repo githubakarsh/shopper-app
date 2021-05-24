@@ -10,6 +10,43 @@
   border-radius: 4px;
 }
 
+@media screen and (max-width : 600px) {
+  .search-container {
+    padding: 20px;
+    top: 30px;
+    margin-left: 10px;
+  }
+
+  .search-box {
+    width : calc(100% - 4px);
+  }
+}
+
 .search-box:focus {
   outline: 1px solid #16a2ff;
 }
+
+.search-list {
+  list-style-type: none;
+  background-color: white;
+  padding-left: 0px;
+  margin-top: 0px;
+  border: 1px solid lightgray;
+}
+
+.search-list li {
+  padding : 15px;
+  padding-left: 22px;
+  border-bottom: 1px solid lightgray;
+}
+
+.search-list li:last-child {
+  border-bottom: none;
+} 
+
+.search-list li:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+

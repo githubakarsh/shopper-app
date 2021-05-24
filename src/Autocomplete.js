@@ -1,18 +1,23 @@
-import React, { useEffect, useState } from "react";
-
-import { fetchSuggestions } from "./utils/api";
-
+import React from "react";
 import "./Autocomplete.css";
 
-function Autocomplete() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
+const Autocomplete = ({
+  searchTerm,
+  onSearchTerm,
+  suggestions,
+  onSelectSearchItem,
+  displayList
+}) => {
 
-  useEffect(() => {
-    fetchSuggestions(searchTerm).then((_suggestions) =>
-      setSuggestions(_suggestions)
-    );
-  }, [searchTerm]);
+  const searchResultsList = () => {
+    if(suggestions.length > 0) {
+      return (<ul className="search-list" id="search-list">
+      {suggestions.slice(0,10).map((list) => {
+        return <li id="menu-item" onClick={(e) => onSelectSearchItem(e, list.id)}key={list.id}>{list.title}</li>
+      }) }
+    </ul>)
+    } 
+  }
 
   return (
     <div className="search-container">
@@ -21,9 +26,10 @@ function Autocomplete() {
         value={searchTerm}
         className="search-box"
         placeholder="Search for a product"
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={(e) => onSearchTerm(e.target.value)}
+        id="search-box"
       />
-      {/* TODO: render search suggestions */}
+      {displayList && searchResultsList()}
     </div>
   );
 }
